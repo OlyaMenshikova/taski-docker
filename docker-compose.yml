@@ -15,16 +15,20 @@ services:
     env_file: .env
     volumes:
       - static:/backend_static
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
   frontend:
     env_file: .env
     build: ./frontend/
+    depends_on:
+      - backend
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
   gateway:
     build: ./gateway/
+    depends_on:
+      - frontend
     volumes:
       - static:/staticfiles/
     ports:

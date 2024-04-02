@@ -13,17 +13,23 @@ services:
   backend:
     image: menshik/taski_backend
     env_file: .env
+    depends_on:
+      - db
     volumes:
       - static_volume:/backend_static
   frontend:
     image: menshik/taski_frontend
     env_file: .env
+    depends_on:
+      - backend
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static
   gateway:
     image: menshik/taski_gateway
     env_file: .env
+    depends_on:
+      - frontend
     volumes:
       - static_volume:/staticfiles/
     ports:
