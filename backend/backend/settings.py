@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = bool(os.getenv('DEBUG'))
+DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = ['crazy.hopto.org', '127.0.0.1']
 
